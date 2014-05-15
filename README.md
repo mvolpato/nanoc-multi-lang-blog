@@ -3,7 +3,7 @@ nanoc-multi-lang-blog
 
 A template for implementing a 2 languages blog using nanoc.
 
-See the [compiled result](http://volpato.nl/nanoc-multi-lang-blog/ "nanoc-multi-lang-blog demo").
+See the [compiled result](http://mvolpato.github.io/nanoc-multi-lang-blog/ "nanoc-multi-lang-blog demo").
 
 ---
 The MIT License (MIT)
