@@ -1,0 +1,58 @@
+<% render 'default' do %>
+
+      <h2 class="content-title">
+        <%= link_to item[:title], relative_path_to(item) %>
+      </h2>  
+        <h3 class="content-subheader">
+          <div class="content-date">
+<% if language_code_of(item) == 'en' %>
+<%=  get_pretty_date(item) %>
+<% else %>
+<%=  get_pretty_date_it(item) %>
+<% end %>
+
+ </div>
+	</h3>
+
+      <%= yield %>
+    
+<% nextPost = nil
+prevPost = nil
+selected = sorted_articles.select { |i| language_code_of(@item) == language_code_of(i) }
+
+if item == selected.first && selected.length >1
+	nextPost = selected[1]
+elsif item == selected.last && selected.length >1
+	prevPost = selected[-2]
+else
+	$i = 1
+	while $i < selected.length  do
+	   if item == selected[$i]
+		prevPost = selected[$i-1]
+		nextPost = selected[$i+1]
+		break
+	   end
+	   $i +=1
+	end
+end
+%>
+       <ul class="pager">
+          
+<% if nextPost != nil %>
+  <li>
+    <a href="<%=relative_path_to(nextPost)%>" title="<%=(language_code_of(item) == 'en' ? 'Previous article' : 'Articolo precedente')%>: <%=nextPost[:title]%>"><span class="content-article-arrow">&laquo; </span><%=nextPost[:title]%>
+      </a>
+  </li>
+
+<% end %> 
+<% if prevPost != nil %>
+  <li> 
+<a href="<%=relative_path_to(prevPost)%>" title="<%=(language_code_of(item) == 'en' ? 'Next article' : 'Articolo successivo')%>: <%=prevPost[:title]%>">
+	<%=prevPost[:title]%>
+      <span class="content-article-arrow">&raquo;</span></a>
+  </li>
+<% end %> 
+</ul>
+
+
+<% end %>

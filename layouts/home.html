@@ -1,0 +1,51 @@
+<% render 'default' do %>
+<% post = nil 
+  nextPost = nil
+  sorted_articles.each do |i| %>
+
+<%    if language_code_of(i) == language_code_of(item)
+      if post != nil
+        nextPost = i
+        break
+      else
+        post = i
+      end
+    end
+  end
+
+%>
+
+      <h2 class="content-title">
+      <%= link_to post[:title], relative_path_to(post) %>
+      </h2>
+        <h3 class="content-subheader">
+          <div class="content-date">
+<% if language_code_of(post) == 'en' %>
+<%=  get_pretty_date(post) %>
+<% else %>
+<%=  get_pretty_date_it(post) %>
+<% end %>
+
+</div>
+	</h3>
+    <div class="content-body">
+    
+      <%= post.compiled_content %>
+
+       <ul class="pager">
+          
+<% if nextPost != nil %>
+  <li>
+    <a href="<%=relative_path_to(nextPost)%>" title="<%=(language_code_of(post) == 'en' ? 'Previous article' : 'Articolo precedente')%>: <%=nextPost[:title]%>"><span class="content-article-arrow">&laquo; </span><%=nextPost[:title]%>
+      </a>
+  </li>
+
+<% end %> 
+</ul>
+
+    
+    </div>
+
+
+
+<% end %>
