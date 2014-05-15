@@ -28,6 +28,12 @@ route '*' do
   if item[:extension] == 'css'
     # Write item with identifier /foo/ to /foo.css
     item.identifier.chop + '.css'
+  elsif item[:extension] == 'min.css'
+    # Write item with identifier /foo/ to /foo.min.css
+    item.identifier.chop + '.min.css'
+  elsif item[:extension] == 'min.js'
+    # Write item with identifier /foo/ to /foo.min.js
+    item.identifier.chop + '.min.js'
   elsif item.binary?
     # Write item with identifier /foo/ to /foo.ext
     item.identifier.chop + '.' + item[:extension]
